@@ -88,7 +88,7 @@ public final class EncodeActivity extends Activity {
     Intent intent = getIntent();
     if (intent != null) {
       String type = intent.getStringExtra(Intents.Encode.TYPE);
-      encodeItem.setVisible(Contents.Type.CONTACT.equals(type));
+      encodeItem.setVisible(Contents.Type.CONTACT_TYPE.equals(type));
     }
     return super.onCreateOptionsMenu(menu);
   }

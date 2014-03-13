@@ -116,7 +116,7 @@ final class QRCodeEncoder {
         return false;
       }
       this.format = BarcodeFormat.QR_CODE;
-      encodeQRCodeContents(intent, type);
+      encodeQRCodeContents(intent, Contents.Type.valueOf(type));
     } else {
       String data = intent.getStringExtra(Intents.Encode.DATA);
       if (data != null && !data.isEmpty()) {
@@ -213,9 +213,9 @@ final class QRCodeEncoder {
     }
   }
 
-  private void encodeQRCodeContents(Intent intent, String type) {
+  private void encodeQRCodeContents(Intent intent, Contents.Type type) {
     switch (type) {
-      case Contents.Type.TEXT: {
+      case TEXT_TYPE: {
         String data = intent.getStringExtra(Intents.Encode.DATA);
         if (data != null && !data.isEmpty()) {
           contents = data;
@@ -224,7 +224,7 @@ final class QRCodeEncoder {
         }
         break;
       }
-      case Contents.Type.EMAIL: {
+      case EMAIL_TYPE: {
         String data = ContactEncoder.trim(intent.getStringExtra(Intents.Encode.DATA));
         if (data != null) {
           contents = "mailto:" + data;
@@ -233,7 +233,7 @@ final class QRCodeEncoder {
         }
         break;
       }
-      case Contents.Type.PHONE: {
+      case PHONE_TYPE: {
         String data = ContactEncoder.trim(intent.getStringExtra(Intents.Encode.DATA));
         if (data != null) {
           contents = "tel:" + data;
@@ -242,7 +242,7 @@ final class QRCodeEncoder {
         }
         break;
       }
-      case Contents.Type.SMS: {
+      case SMS_TYPE: {
         String data = ContactEncoder.trim(intent.getStringExtra(Intents.Encode.DATA));
         if (data != null) {
           contents = "sms:" + data;
@@ -251,7 +251,7 @@ final class QRCodeEncoder {
         }
         break;
       }
-      case Contents.Type.CONTACT: {
+      case CONTACT_TYPE: {
 
         Bundle bundle = intent.getBundleExtra(Intents.Encode.DATA);
         if (bundle != null) {
@@ -286,7 +286,7 @@ final class QRCodeEncoder {
 
         break;
       }
-      case Contents.Type.LOCATION: {
+      case LOCATION_TYPE: {
         Bundle bundle = intent.getBundleExtra(Intents.Encode.DATA);
         if (bundle != null) {
           // These must use Bundle.getFloat(), not getDouble(), it's part of the API.
@@ -304,7 +304,7 @@ final class QRCodeEncoder {
   }
 
   private static List<String> getAllBundleValues(Bundle bundle, String[] keys) {
-    List<String> values = new ArrayList<>(keys.length);
+    List<String> values = new ArrayList<String>(keys.length);
     for (String key : keys) {
       Object value = bundle.get(key);
       values.add(value == null ? null : value.toString());
@@ -342,7 +342,7 @@ final class QRCodeEncoder {
     Map<EncodeHintType,Object> hints = null;
     String encoding = guessAppropriateEncoding(contentsToEncode);
     if (encoding != null) {
-      hints = new EnumMap<>(EncodeHintType.class);
+      hints = new EnumMap<EncodeHintType, Object>(EncodeHintType.class);
       hints.put(EncodeHintType.CHARACTER_SET, encoding);
     }
     BitMatrix result;

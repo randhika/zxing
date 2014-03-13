@@ -109,7 +109,7 @@ public final class ShareActivity extends Activity {
   private void launchSearch(String text) {
     Intent intent = new Intent(Intents.Encode.ACTION);
     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-    intent.putExtra(Intents.Encode.TYPE, Contents.Type.TEXT);
+    intent.putExtra(Intents.Encode.TYPE, Contents.Type.TEXT_TYPE);
     intent.putExtra(Intents.Encode.DATA, text);
     intent.putExtra(Intents.Encode.FORMAT, BarcodeFormat.QR_CODE.toString());
     startActivity(intent);
@@ -157,7 +157,7 @@ public final class ShareActivity extends Activity {
     }
     Intent intent = new Intent(Intents.Encode.ACTION);
     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-    intent.putExtra(Intents.Encode.TYPE, Contents.Type.TEXT);
+    intent.putExtra(Intents.Encode.TYPE, Contents.Type.TEXT_TYPE);
     intent.putExtra(Intents.Encode.DATA, text);
     intent.putExtra(Intents.Encode.FORMAT, BarcodeFormat.QR_CODE.toString());
     startActivity(intent);
@@ -278,7 +278,7 @@ public final class ShareActivity extends Activity {
 
     Intent intent = new Intent(Intents.Encode.ACTION);
     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-    intent.putExtra(Intents.Encode.TYPE, Contents.Type.CONTACT);
+    intent.putExtra(Intents.Encode.TYPE, Contents.Type.CONTACT_TYPE);
     intent.putExtra(Intents.Encode.DATA, bundle);
     intent.putExtra(Intents.Encode.FORMAT, BarcodeFormat.QR_CODE.toString());
 
